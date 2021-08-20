@@ -25,6 +25,7 @@ DEALINGS IN THE SOFTWARE.
 from __future__ import annotations
 
 import datetime
+import copy
 from typing import Any, Dict, Final, List, Protocol, TYPE_CHECKING, Type, TypeVar, Union
 
 from . import utils
@@ -264,6 +265,10 @@ class Embed:
     def copy(self: E) -> E:
         """Returns a shallow copy of the embed."""
         return self.__class__.from_dict(self.to_dict())
+
+    def deepcopy(self: E) -> E:
+        """Returns a deep copy of the embed."""
+        return self.__class__.from_dict(copy.deepcopy(self.to_dict()))
 
     def __len__(self) -> int:
         total = len(self.title) + len(self.description)
